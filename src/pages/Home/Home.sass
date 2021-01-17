@@ -1,62 +1,24 @@
-.content
-  div
-    margin: 1em
+.home
+  position: absolute
+  width: 100%
+  height: 100%
+  min-width: 320px
+  overflow-y: scroll
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar
+      display: none;
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+
 
   .landing-page-info
+    text-align: center
     display: flex
+    flex-direction: column
     justify-content: space-between
-    vertical-align: center
     margin: 2em 1em
     padding: 1em
     box-shadow: 1px 1px 5px 2px lightgrey
     border-radius: 5px
-
-  .podcast-preview
-    display: flex
-    flex-direction: column
-    justify-content: space-evenly
-    align-items: center
-    width: 60%
-    margin: 0 auto
-    padding: 0 1em
-    box-shadow: 1px 1px 5px 2px lightgrey
-    border-radius: 5px
-
-    h2
-      margin: .5em 0
-
-    .podcast-container
-      border-radius: 5px
-      display: flex
-      flex-direction: row
-      margin: 1em
-      align-items: center
-      justify-content: left
-      width: 100%
-      min-height: 132px
-      background-color: lightgray
-      flex-wrap: wrap
-
-      .thumbnail
-        margin: 1em
-        width: 100px
-        height: 80px
-        cursor: pointer
-
-      .details
-        display: flex
-        flex-direction: column
-        justify-content: flex-start
-        align-items: flex-start
-        min-height: 80px
-        max-width: 60%
-
-        h3
-          margin: 0
-        span
-          overflow: hidden
-          display: -webkit-box
-          -webkit-line-clamp: 3
-          -webkit-box-orient: vertical
-          font-size: 90%
-

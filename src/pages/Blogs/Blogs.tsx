@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Blog from '../../types/blog'
+import Blog from '../../types/blog';
+import BlogList from '../../partials/BlogList';
+import './Blogs.sass';
 
 const QUERY_LIMIT = 10;
 
@@ -9,30 +11,20 @@ function Blogs() {
     const [page, setPage] = useState(0);
 
     useEffect(() => {
-        axios.get(`http://localhost:1337/blogs?_start=${QUERY_LIMIT * page}&_limit=${QUERY_LIMIT}`)
+        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/blogs?_start=${QUERY_LIMIT * page}&_limit=${QUERY_LIMIT}`)
         .then(response => {
             if (response.status === 200) {
-                setBlogs(response.data.blogs ?? []);
+                setBlogs(response.data ?? []);
             }
         });    
     }, []);
 
-    console.log(blogs);
-    const blogList = blogs.map((blog: Blog) => {
-        return (
-            <ul>
-                <li>{blog.header}</li>
-                <li>{blog.author}</li>
-                <li>{blog.publishDate}</li>
-            </ul>
-        )
-    });
+    
 
     return (
-        <>
-            <h1>Blogs</h1>
-            {blogList}
-        </>
+        <div id={'blogs'} className={'blogs'}>
+            <BlogList title={'Blogs'} blogs={blogs}/>
+        </div>
     );
 }
 
