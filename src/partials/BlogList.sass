@@ -3,11 +3,16 @@
     flex-direction: column
     justify-content: space-evenly
     align-items: center
-    width: calc(100% - 2em)
-    margin: 1em
+    margin: 1em auto 100px
     box-shadow: 1px 1px 5px 2px lightgrey
     border-radius: 5px
-    margin-bottom: 100px
+
+    @media screen and (max-width: 600px)
+        max-width: calc(100% - 2em)
+    @media screen and (min-width: 601px) and (max-width: 826px)
+        max-width: 580px
+    @media screen and (min-width: 827px) and (max-width: 1920px)
+        max-width: 800px
 
     h2
       margin: .5em 0
@@ -41,7 +46,7 @@
         justify-content: flex-start
         align-items: flex-start
         min-height: 80px
-        max-width: 60%
+        max-width: 80%
 
     h3
         margin: 0
@@ -51,3 +56,29 @@
         -webkit-line-clamp: 3
         -webkit-box-orient: vertical
         font-size: 90%
+
+.pagination-container
+    display: flex
+    flex-direction: row
+    justify-content: center
+    margin: 1em 0
+    width: 100%
+    text-align: center
+
+
+    .page-number
+        padding: 0 1em
+        width: 20px
+
+    .pagination
+        position: absolute
+        width: 20px
+        height: 20px
+        cursor: pointer
+        border-radius: 25px
+        &:hover
+            background-color: rgba(211,211,211, .5)
+    .backward
+        margin-right: calc(2em + 20px)
+    .forward
+        margin-left: calc(2em + 20px)

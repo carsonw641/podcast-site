@@ -4,20 +4,25 @@ import BlogReader from '../partials/BlogReader';
 import { v4 as uuidv4 } from 'uuid';
 import './BlogList.sass';
 
-function BlogList(props: any) {
+const PAGE_LIMIT = 5;
 
+function BlogList(props: any) {
+    const [page, setPage] = useState<number>(0);
     const [displayBlogReader, setBlogReaderStatus] = useState<boolean>(false)
 
     const closeModal = () => {
         setBlogReaderStatus(false);
     };
 
+    const firstIndex = page * PAGE_LIMIT;
+    const lastIndex = firstIndex + PAGE_LIMIT <= props.blogs.length ? firstIndex + PAGE_LIMIT : props.blogs.length;
+    const blogs: Blog[] = props.blogs.slice(firstIndex, lastIndex);
+
     return (
         <div className={'blog-preview'}>
             <h2>{props.title}</h2>
             {
-                props.blogs.map((blog: Blog) => {
-                    console.log(blog.author.picture)
+                blogs.map((blog: Blog) => {
                     return (
                         <div key={uuidv4()} className={'blog-container'} onClick={ (e) => setBlogReaderStatus(true)}>
                             <div className={'thumbnail'}>
@@ -46,7 +51,11 @@ function BlogList(props: any) {
                     );
                 })
             }
-            
+            {props.pagination && <div className={'pagination-container'}>
+                {firstIndex !== 0 && <div className={'pagination backward'} onClick={ () => setPage(page - 1)}>{'<'}</div>}
+                <div className={'page-number'}>{page + 1}</div>
+                {lastIndex !== props.blogs.length && <div className={'pagination forward'} onClick={ () => setPage(page + 1)}>{'>'}</div>}
+            </div>}
         </div>
     );
 }

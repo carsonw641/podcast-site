@@ -8,10 +8,9 @@ const QUERY_LIMIT = 10;
 
 function Blogs() {
     const [blogs, setBlogs] = useState<Blog[]>([]);
-    const [page, setPage] = useState(0);
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/blogs?_start=${QUERY_LIMIT * page}&_limit=${QUERY_LIMIT}`)
+        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/blogs`)
         .then(response => {
             if (response.status === 200) {
                 setBlogs(response.data ?? []);
@@ -23,7 +22,7 @@ function Blogs() {
 
     return (
         <div id={'blogs'} className={'blogs'}>
-            <BlogList title={'Blogs'} blogs={blogs}/>
+            <BlogList title={'Blogs'} blogs={blogs} pagination={true}/>
         </div>
     );
 }
